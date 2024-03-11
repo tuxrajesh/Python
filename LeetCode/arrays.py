@@ -178,34 +178,55 @@ def valid_sudoku(board):
     Output: false
     Explanation: Same as Example 1, except with the 5 in the top left corner being modified to 8. Since there are two 8's in the top left 3x3 sub-box, it is invalid.
     """
-    if board.length != 9:
+    if len(board) != 9:
         return False
     
-    for row in range(board.length):
-        if board[row].length != 9:
-            return False
+    import collections
+    
+    cols = collections.defaultdict(set)
+    rows = collections.defaultdict(set)
+    squares = collections.defaultdict(set)
+    
+    for row in range(len(board)):        
+        if len(board[row]) != 9:
+            return False        
         
-        # Each row must contain the digits 1-9 without repetition.
-        for col in range(0, board.length):
-            nxt = col + 1
-            while nxt < board.length:                
-                if board[row][col] != "." and board[row][col] == board[row][nxt]:
-                    return False
-                else:
-                    nxt += 1
-                    continue
+        for col in range(len(board)):
+            if board[row][col] == ".":
+                continue
+            
+            if board[row][col] in rows[row] or board[row][col] in cols[col] or board[row][col] in squares[(row//3,col//3)]:
+                return False
+                  
+            rows[row].add(board[row][col])
+            cols[col].add(board[row][col])
+            squares[(row//3,col//3)].add(board[row][col])
+    return True
+
+def rotate(matrix):
+    """
+    You are given an n x n 2D matrix representing an image, rotate the image by 90 degrees (clockwise).
+    You have to rotate the image in-place, which means you have to modify the input 2D matrix directly. DO NOT allocate another 2D matrix and do the rotation.  
+    
+    >>> Example:
+    Input: matrix = [[1,2,3],[4,5,6],[7,8,9]]
+    Output: [[7,4,1],[8,5,2],[9,6,3]]
+    """
+    print(len(matrix))
     pass
 
 nums1 = [2,7,11,15]
 target = 9
-board = [["8","3",".",".","7",".",".",".","."]
-    ,["6",".",".","1","9","5",".",".","."]
-    ,[".","9","8",".",".",".",".","6","."]
-    ,["8",".",".",".","6",".",".",".","3"]
-    ,["4",".",".","8",".","3",".",".","1"]
-    ,["7",".",".",".","2",".",".",".","6"]
-    ,[".","6",".",".",".",".","2","8","."]
-    ,[".",".",".","4","1","9",".",".","5"]
-    ,[".",".",".",".","8",".",".","7","9"]]
-print(valid_sudoku(board))
+board = [["8","3",".",".","7",".",".",".","."],
+         ["6",".",".","1","9","5",".",".","."],
+         [".","9","8",".",".",".",".","6","."],
+         ["8",".",".",".","6",".",".",".","3"],
+         ["4",".",".","8",".","3",".",".","1"],
+         ["7",".",".",".","2",".",".",".","6"],
+         [".","6",".",".",".",".","2","8","."],
+         [".",".",".","4","1","9",".",".","5"],
+         [".",".",".",".","8",".",".","7","9"]]
+
+matrix = [[1,2,3],[4,5,6],[7,8,9]] 
+print(rotate(matrix))
 # print(intersection_of_arrays(nums1, nums2))
