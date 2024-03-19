@@ -123,9 +123,9 @@ def myatoi(s):
     if my_int < -2**31:
         return -2**31
     elif my_int > 2**31 - 1:
-        return -2**31 - 1
+        return 2**31 - 1
     else:
         return my_int
 
-x = "abcd"
+x = "21474836460"
 print(myatoi(x))
