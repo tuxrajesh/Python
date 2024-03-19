@@ -127,5 +127,21 @@ def myatoi(s):
     else:
         return my_int
 
-x = "21474836460"
-print(myatoi(x))
+def strStr(haystack, needle):
+    """
+    Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+    """
+    if haystack == "" and needle == "":
+        return 0
+    
+    if len(needle) > len(haystack):
+        return -1
+    
+    if haystack.count(needle) == 0:
+        return -1
+    else:
+        return haystack.find(needle)
+
+haystack = "sadbutsad"
+needle = "sad"
+print(strStr(haystack, needle))
