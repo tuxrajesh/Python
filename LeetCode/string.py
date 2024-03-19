@@ -142,6 +142,25 @@ def strStr(haystack, needle):
     else:
         return haystack.find(needle)
 
+def longest_common_prefix(strs):
+    """
+    Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+    
+    Example: strs = ["flower","flow","flight"]
+    retun "fl"
+    """
+    if not strs:
+        return ""
+    
+    shortest = min(strs, key=len)
+    
+    for i, ch in enumerate(shortest):
+        for other in strs:
+            if other[i] != ch:
+                return shortest[:i]
+    
+    return shortest
+
 haystack = "sadbutsad"
 needle = "sad"
 print(strStr(haystack, needle))
