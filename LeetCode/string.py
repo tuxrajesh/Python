@@ -123,9 +123,44 @@ def myatoi(s):
     if my_int < -2**31:
         return -2**31
     elif my_int > 2**31 - 1:
-        return -2**31 - 1
+        return 2**31 - 1
     else:
         return my_int
 
-x = "abcd"
-print(myatoi(x))
+def strStr(haystack, needle):
+    """
+    Given two strings needle and haystack, return the index of the first occurrence of needle in haystack, or -1 if needle is not part of haystack.
+    """
+    if haystack == "" and needle == "":
+        return 0
+    
+    if len(needle) > len(haystack):
+        return -1
+    
+    if haystack.count(needle) == 0:
+        return -1
+    else:
+        return haystack.find(needle)
+
+def longest_common_prefix(strs):
+    """
+    Write a function to find the longest common prefix string amongst an array of strings. If there is no common prefix, return an empty string "".
+    
+    Example: strs = ["flower","flow","flight"]
+    retun "fl"
+    """
+    if not strs:
+        return ""
+    
+    shortest = min(strs, key=len)
+    
+    for i, ch in enumerate(shortest):
+        for other in strs:
+            if other[i] != ch:
+                return shortest[:i]
+    
+    return shortest
+
+haystack = "sadbutsad"
+needle = "sad"
+print(strStr(haystack, needle))
