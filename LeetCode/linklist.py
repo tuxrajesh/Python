@@ -66,9 +66,28 @@ class ListNode:
         slowp.next = slowp.next.next
         node_to_remove = None
         return head
+    
+    def reverse_list(self, head):
+        """reverse a linked list"""
+        prev = None
+        curr = head
+        next = head.next
+        
+        while next is not None:            
+            curr.next = prev
+            prev = curr
+            curr = next            
+            next = next.next
+        
+        curr.next = prev
+        prev = curr
+        curr = next
+                         
+        return prev
+        
 
 listNode = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-listNode.print_list(listNode.remove_nth_from_end_optimal(listNode, 5))
+listNode.print_list(listNode.reverse_list(listNode))
 
 # listNode = ListNode(1)
 # listNode.print_list(listNode.remove_nth_from_end(listNode, 1))
