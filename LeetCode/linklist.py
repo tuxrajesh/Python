@@ -84,13 +84,39 @@ class ListNode:
         curr = next
                          
         return prev
-        
 
-listNode = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-listNode.print_list(listNode.reverse_list(listNode))
+    def merge_two_sorted_lists(self, list1, list2):
+        """merge two sorted linked lists"""
+        """example: 1 -> 2 -> 4, 1 -> 3 -> 4"""
+        """output: 1 -> 1 -> 2 -> 3 -> 4 -> 4"""
+        if list1 is None:
+            return list2
+        elif list2 is None:
+            return list1
 
-# listNode = ListNode(1)
-# listNode.print_list(listNode.remove_nth_from_end(listNode, 1))
+        head1 = list1
+        head2 = list2
 
-# listNode = ListNode(1, ListNode(2))
-# listNode.print_list(listNode.remove_nth_from_end(listNode, 1))
+        node1 = list1
+        node2 = list2
+        while node1 is not None and node2 is not None:
+            print(f"node1: {node1.val}, node2: {node2.val}")           
+            if node1.val <= node2.val:
+                brk = node1.next
+                node1.next = node2
+                node1 = brk                
+            else:
+                brk = node2.next
+                node2.next = node1
+                node2 = brk
+        if head1.val <= head2.val:
+            return head1
+        else:
+            return head2
+
+# list1 = ListNode(1, ListNode(2, ListNode(4)))
+# list2 = ListNode(1, ListNode(3, ListNode(4)))
+list1 = ListNode(5)
+list2 = ListNode(1, ListNode(2, ListNode(4)))
+listMerge = ListNode()
+listMerge.print_list(listMerge.merge_two_sorted_lists(list1, list2))
