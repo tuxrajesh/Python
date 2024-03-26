@@ -89,34 +89,35 @@ class ListNode:
         """merge two sorted linked lists"""
         """example: 1 -> 2 -> 4, 1 -> 3 -> 4"""
         """output: 1 -> 1 -> 2 -> 3 -> 4 -> 4"""
-        if list1 is None:
-            return list2
-        elif list2 is None:
-            return list1
+        dummy = ListNode(0)
+        curr = dummy
+        while True:
+            # if any list gets to the last; then attach tail to the remaining elements in the other list
+            if list1 is None:
+                curr.next = list2
+                break
+            if list2 is None:
+                curr.next = list1
+                break
 
-        head1 = list1
-        head2 = list2
-
-        node1 = list1
-        node2 = list2
-        while node1 is not None and node2 is not None:
-            print(f"node1: {node1.val}, node2: {node2.val}")           
-            if node1.val <= node2.val:
-                brk = node1.next
-                node1.next = node2
-                node1 = brk                
+            # compare the date of the list and whichever is smaller or equaal append to the last of the merged list and change the pointer to the next element
+            if list1.val <= list2.val:
+                curr.next = list1
+                list1 = list1.next
             else:
-                brk = node2.next
-                node2.next = node1
-                node2 = brk
-        if head1.val <= head2.val:
-            return head1
-        else:
-            return head2
+                curr.next = list2
+                list2 = list2.next
+            
+            # move the tail
+            curr = curr.next
+
+        return dummy.next
 
 # list1 = ListNode(1, ListNode(2, ListNode(4)))
 # list2 = ListNode(1, ListNode(3, ListNode(4)))
-list1 = ListNode(5)
-list2 = ListNode(1, ListNode(2, ListNode(4)))
+# list1 = ListNode(5)
+# list2 = ListNode(1, ListNode(2, ListNode(4)))
+list1 = ListNode(-7)
+list2 = ListNode(-10, ListNode(-10, ListNode(-9, ListNode(-4, ListNode(1, ListNode(6, ListNode(6)))))))
 listMerge = ListNode()
 listMerge.print_list(listMerge.merge_two_sorted_lists(list1, list2))
