@@ -112,12 +112,30 @@ class ListNode:
             curr = curr.next
 
         return dummy.next
+    
+    def palindrome_linked_list(self, head):
+        """
+        Given the head of a singly linked list, return true if it is a palindrome or false otherwise.
+        """
+        self.print_list(head)
+        values = []
+        while head is not None:
+            values.append(head.val)
+            head = head.next
 
+        for i in range(len(values)):
+            if values[i] != values[len(values) - i - 1]:
+                return False
+        return True
 # list1 = ListNode(1, ListNode(2, ListNode(4)))
 # list2 = ListNode(1, ListNode(3, ListNode(4)))
 # list1 = ListNode(5)
 # list2 = ListNode(1, ListNode(2, ListNode(4)))
-list1 = ListNode(-7)
-list2 = ListNode(-10, ListNode(-10, ListNode(-9, ListNode(-4, ListNode(1, ListNode(6, ListNode(6)))))))
-listMerge = ListNode()
-listMerge.print_list(listMerge.merge_two_sorted_lists(list1, list2))
+# list1 = ListNode(-7)
+# list2 = ListNode(-10, ListNode(-10, ListNode(-9, ListNode(-4, ListNode(1, ListNode(6, ListNode(6)))))))
+# listMerge = ListNode()
+# listMerge.print_list(listMerge.merge_two_sorted_lists(list1, list2))
+list1 = ListNode(1, ListNode(2))
+print(list1.palindrome_linked_list(list1))
+list2 = ListNode(1, ListNode(2, ListNode(1)))
+print(list2.palindrome_linked_list(list2))
