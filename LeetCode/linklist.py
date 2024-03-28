@@ -9,9 +9,13 @@ class ListNode:
         
     def print_list(self, head):
         print("------------------ LIST --------------------------")
+        i = 0
         while head:
+            i += 1
+            if i > 50:
+                break
             print(f"{head.val}", end=" -> ")
-            head = head.next
+            head = head.next            
         print("None")
 
     def remove_nth_from_end(self, head, n):
@@ -127,6 +131,20 @@ class ListNode:
             if values[i] != values[len(values) - i - 1]:
                 return False
         return True
+    
+    def linked_list_cycle(self, head):
+        """
+        Given head, the head of a linked list, determine if the linked list has a cycle in it.
+        """
+        elements = []
+        pos = 0
+        while head is not None:
+            if head in elements:
+                return True
+            elements.append(head)
+            pos += 1
+            head = head.next
+        return False
 # list1 = ListNode(1, ListNode(2, ListNode(4)))
 # list2 = ListNode(1, ListNode(3, ListNode(4)))
 # list1 = ListNode(5)
@@ -135,7 +153,14 @@ class ListNode:
 # list2 = ListNode(-10, ListNode(-10, ListNode(-9, ListNode(-4, ListNode(1, ListNode(6, ListNode(6)))))))
 # listMerge = ListNode()
 # listMerge.print_list(listMerge.merge_two_sorted_lists(list1, list2))
-list1 = ListNode(1, ListNode(2))
-print(list1.palindrome_linked_list(list1))
-list2 = ListNode(1, ListNode(2, ListNode(1)))
-print(list2.palindrome_linked_list(list2))
+# list1 = ListNode(1, ListNode(2))
+# print(list1.palindrome_linked_list(list1))
+# list2 = ListNode(1, ListNode(2, ListNode(1)))
+# print(list2.palindrome_linked_list(list2))
+node1 = ListNode(4)
+node2 = ListNode(3, node1)
+node3 = ListNode(2, node2)
+node4 = ListNode(1, node3)
+node1.next = node3
+node1.print_list(node4)
+print(node4.linked_list_cycle(node4))
